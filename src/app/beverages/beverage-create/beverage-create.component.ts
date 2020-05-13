@@ -10,16 +10,22 @@ import { Router } from '@angular/router';
 
 export class BeverageCreateComponent implements OnInit {
 
-  beverage: Object = {};
+  beverage: Object;
 
-  constructor(private router: Router, private beverageService: BeverageService) { }
+  constructor(
+    private router: Router, 
+    private beverageService: BeverageService
+  ) { }
 
   ngOnInit() {
-
+    this.beverage = {};
   }
 
   async createBeverage(beverage: Object) {
-
+    const resp = await this.beverageService.addBeverage(beverage);
+    if (resp) {
+      this.router.navigate(['/beverages']);
+    }
   }
-
+  
 }
